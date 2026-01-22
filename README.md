@@ -1,125 +1,111 @@
-# The Gradle Git Repo Plugin
+# Gradle Git Repo 插件
 
-This plugin allows you to add a git repository as a maven repo, even if the git
-repository is private, similar to how CocoaPods works.
+这是一个 Gradle 插件，允许你将 Git 仓库作为 Maven 仓库使用。即使是私有的 Git 仓库也可以正常工作（类似于 CocoaPods 的工作方式）。
 
-Using a github repo as a maven repo is a quick and easy way to host maven jars.
-Private maven repos however, aren't easily accessible via the standard maven
-http interface, or at least I haven't figured out how to get the authentication
-right. This plugin simply clones the repo behind the scenes and uses it as a
-local repo, so if you have permissions to clone the repo you can access it.
+通过将 GitHub 仓库用作 Maven 仓库，你可以快速简便地托管 Maven JAR 包。传统的私有 Maven 仓库通常需要复杂的 HTTP 认证配置。该插件通过在后台克隆仓库并将其作为本地仓库使用，只要你有权限克隆该仓库，就可以访问其中的依赖。
 
-This plugin lets you tie access to your repository to github accounts,
-seamlessly. This is most useful if you've already set up to manage distribution
-this way. Deliver CocoaPods and Maven artifacts with the same system, then sit
-back and relax.
+## 核心特性
 
-## Building
+*   **支持 Gradle 8.x/9.x**：已适配最新的 Gradle 版本。
+*   **支持私有仓库**：基于 Git SSH/HTTP 认证，无需额外配置 Maven 认证。
+*   **简单易用**：直接在 `repositories` 块中声明。
 
-Run `gradle build` to build, and `gradle -Porg=layerhq -Prepo=gradle-releases publishToGithub`
-to publish. The plugin uses itself to publish itself :).
+---
 
-## Usage
+## 如何使用
 
-This plugin needs to be added via the standard plugin mechanism with this buildscript in your top level project
+### 1. 引入插件
 
-    buildscript {
-        repositories {
-            maven { url "https://github.com/blazeqin/gradle-git-repo-plugin/raw/master/releases" }
-        }
-        dependencies {
-            classpath 'com.github.blazeqin.gradle:git-repo-plugin:2.0.0'
-        }
-    }
+在你的项目 `settings.gradle` 或根目录 `build.gradle` 中配置插件仓库：
 
-and then apply the plugin
-
-    apply plugin: 'com.github.blazeqin.gradle.git-repo-plugin'
-
-
-### Depending on github repos
-
-This plug adds a `github` method to your repositories block
-
+```groovy
+pluginManagement {
     repositories {
-        github("blazeqin", "maven-private", "master", "releases")
+        maven { url "https://github.com/blazeqin/gradle-git-repo-plugin/raw/master/releases" }
+        gradlePluginPortal()
     }
+}
+```
 
-Add this alongside other repositories and you're good to go
+在你的 `build.gradle` 中应用插件：
 
-### Publishing to github repos
+```groovy
+plugins {
+    id 'com.github.amistad012oss.gradle.git-repo-plugin' version '2.0.0'
+}
+```
 
-Publishing is a bit less seamless, mostly because there isn't one single way to
-handle publishing in gradle (also the maven-publish plugin is infuratingly
-tamper-proof). You're expected to have a task called `publish` by default, that
-publishes to the locally cloned github repo. That task gets wrapped into a
-`publishToGithub` task that handles committing and pushing the change. Then you
-can run
+### 2. 添加 Git 依赖仓库
 
-    gradle -Porg=layerhq -Prepo=gradle-releases publishToGithub
+插件会为 `repositories` 块添加 `github` 方法：
 
-You can also run 
+```groovy
+repositories {
+    // 参数说明: 组织名, 仓库名, 分支(可选, 默认 master), 类型(可选, 默认 releases)
+    github("blazeqin", "maven-private", "master", "releases")
+}
+```
 
-    gradle -Porg=layerhq -Prepo=gradle-releases publish
+添加后，你就可以像使用普通 Maven 仓库一样添加依赖了：
 
-to stage a release in the local github repo and commit it manually.
+```groovy
+dependencies {
+    implementation 'your.group:artifact:1.0.0'
+}
+```
 
-The `maven-publish` plugin defines a publish task for you, so you just need to
-supply the right url in the publishing block
+---
 
-    publishing {
-        publications {
-            //...
-        }
-        repositories {
-            maven {
-                url "file://${System.env.HOME}/.gitRepos/${property("org")}/${property("repo")}/releases"
-            }
-        }
-    }
+## 如何发布
 
-A version of this with the `maven` plugin might look like
+如果你想将自己的项目发布到 Git 仓库中，请按照以下步骤操作：
 
-    String url() {
-        String org =  hasProperty("org") ? property("org") : "layerhq"
-        String repo = hasProperty("repo") ? property("repo") : "maven-private"
-        String repoHome = hasProperty("gitRepoHome") ? property("gitRepoHome") : "${System.env.HOME}/.gitRepos"
-        return "file://$repoHome/$org/$repo/releases"
-    }
-    
-    task publishJar(type: Upload, description: "Upload android Jar library") {
-        configuration = configurations.sdkJar
-        repositories {
-            mavenDeployer {
-                repository(url: url())
-            }
+### 1. 配置发布任务
+
+在你的项目的 `build.gradle` 中设置 `maven-publish`：
+
+```groovy
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
         }
     }
+    repositories {
+        maven {
+            // 这里指定本地克隆仓库的地址，插件会自动处理推送
+            url "file://${System.env.HOME}/.gitRepos/${property("org")}/${property("repo")}/releases"
+        }
+    }
+}
+```
 
-## Flags
+### 2. 执行发布命令
 
-The following flags are supported
+使用以下命令将构件发布并推送到 GitHub：
 
-* `gitRepoHome` (optional for dependencies and publishing, default is ~/.gitRepos) The location for cloned gitrepos
-* `org` (required for publishing) The github org to publish to
-* `repo` (required for publishing) The github repo to publish to
-* `publishTask` (option for publishing, default is publish) The publish task to use
+```bash
+./gradlew -Porg=你的组织名 -Prepo=你的仓库名 publishToGithub
+```
 
-## Futures
+该任务会自动执行以下操作：
+1. 编译并打包项目。
+2. 将构件发布到本地缓存的 Git 目录。
+3. 执行 `git add`, `git commit` 和 `git push` 将更改推送到远程仓库。
 
-It would be nice to make publishing seamless, without the flags, and completely
-hide the locally cloned repo. That might require reimplementing maven
-publishing though. The `maven-publish` plugin isn't amenable to having its
-settings messed with after it's been applied unfortunately.
+---
 
-## Credits
+## 配置项
 
-Douglas Rapp
+支持以下可选参数（通过 `-P` 传递）：
 
-- http://github.com/drapp
-- http://twitter.com/platykurtic
-- douglas.rapp@gmail.com
+*   `gitRepoHome`：本地克隆仓库的存放位置，默认为 `~/.gitRepos`。
+*   `org`：(发布必填) 目标 GitHub 组织或用户名。
+*   `repo`：(发布必填) 目标 GitHub 仓库名。
+*   `publishTask`：(可选) 指定发布任务名称，默认为 `publish`。
 
-## License
+---
 
-The gradle git repo plugin is available under the Apache 2 License. See the LICENSE file for more info.
+## 许可证
+
+本项目采用 Apache 2 许可证。详细信息请参阅 LICENSE 文件。
