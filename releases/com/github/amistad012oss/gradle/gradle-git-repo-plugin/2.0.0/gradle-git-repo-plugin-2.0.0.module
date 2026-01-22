@@ -28,10 +28,10 @@
           "name": "gradle-git-repo-plugin-2.0.0.jar",
           "url": "gradle-git-repo-plugin-2.0.0.jar",
           "size": 27220,
-          "sha512": "536b67e20a806ba3c3d8b947c409d8d47a119168c12bb46bc551cad97bde951f37ceccc653c4feedca15b1105e138dd53ebca773388db2a1c21308f9031e32c8",
-          "sha256": "14af905a0b7e11d79d51ca301a0761fe6e6a6e91f1850ca4b0d8ce30eff2d326",
-          "sha1": "7e6893c42434df093dc8a8d9bfe105c6e9a5e345",
-          "md5": "8913ae08750c9da65a67fdd10f303f97"
+          "sha512": "55c885f29b3cbaa7bbb775369e53afc8bcd17cd711e853a3702f581397787968a636a4d35b0e95c2321262de6705dcc410f49b1e80d71cc3735cf7cef1bea316",
+          "sha256": "664651b4c1cbb41604d90582841b927c33f0166e04a37dbd22aa97a90d792bd3",
+          "sha1": "dabcfcbdd891a7b707ec0ec1ac63b45850ff5323",
+          "md5": "b6c58c52846336c42c7f59802813b11f"
         }
       ]
     },
@@ -49,10 +49,10 @@
           "name": "gradle-git-repo-plugin-2.0.0.jar",
           "url": "gradle-git-repo-plugin-2.0.0.jar",
           "size": 27220,
-          "sha512": "536b67e20a806ba3c3d8b947c409d8d47a119168c12bb46bc551cad97bde951f37ceccc653c4feedca15b1105e138dd53ebca773388db2a1c21308f9031e32c8",
-          "sha256": "14af905a0b7e11d79d51ca301a0761fe6e6a6e91f1850ca4b0d8ce30eff2d326",
-          "sha1": "7e6893c42434df093dc8a8d9bfe105c6e9a5e345",
-          "md5": "8913ae08750c9da65a67fdd10f303f97"
+          "sha512": "55c885f29b3cbaa7bbb775369e53afc8bcd17cd711e853a3702f581397787968a636a4d35b0e95c2321262de6705dcc410f49b1e80d71cc3735cf7cef1bea316",
+          "sha256": "664651b4c1cbb41604d90582841b927c33f0166e04a37dbd22aa97a90d792bd3",
+          "sha1": "dabcfcbdd891a7b707ec0ec1ac63b45850ff5323",
+          "md5": "b6c58c52846336c42c7f59802813b11f"
         }
       ]
     },
@@ -69,10 +69,10 @@
           "name": "gradle-git-repo-plugin-2.0.0-javadoc.jar",
           "url": "gradle-git-repo-plugin-2.0.0-javadoc.jar",
           "size": 261,
-          "sha512": "7e63dad1a5ce397159c6dffe4a3acfde1bcb3b30a869ba35405cdac0516d834371bbbf9ad9a0df5758be4a0d61ae50c871c9847b7395cfa0c262a09ab21e66f4",
-          "sha256": "1dbd9e207bbf101a09d725de2ac12dfb89ac11b1399b7588265d97ce1fdd342d",
-          "sha1": "3c185f5fd04a26914fc75f913c08bf5325139ac7",
-          "md5": "87bcccbbf94a155637025b26e7e09c3b"
+          "sha512": "ee25c0d9c9a914c74c82111748d48bd9010996576112a39bf5f3f5c7ee025a978373856b5d72613f098a38306825f220a0b738893d3438ed2c9e4b0f7fcb01c5",
+          "sha256": "0f25d60ee2a11919da3b7fb2d8f80d06e74e3a7272483bc66ffb225395e5099e",
+          "sha1": "b993970244511942e4fcf4c33151826c07ebf76e",
+          "md5": "c3b01296ac9bd6d6cc38df01a1f930d4"
         }
       ]
     },
@@ -89,10 +89,10 @@
           "name": "gradle-git-repo-plugin-2.0.0-sources.jar",
           "url": "gradle-git-repo-plugin-2.0.0-sources.jar",
           "size": 2526,
-          "sha512": "3dfa12fbf4bfe05f8a9042b2854febb783d15dbe358a1a6fe0d035acab3a58d49fa246a53d873989829b58158d516e721ddbbd28e8088dd6dce69f1e3ca2d3cf",
-          "sha256": "cddc69c9e1ff0b909d1ec289524c0f637ab86dba97db16b950fd63e00200cd7e",
-          "sha1": "393b1ff3966b8f019cf8d112b17c7198eafd63dc",
-          "md5": "2094d0342f894eded3d088667895ec14"
+          "sha512": "19d872355f958b4e265053efbf3d6abee538ba791cd8f37343f5cd00501244cb8c9fd3cd741fc6cb5088429d3ee7f1f496ffa57748ad253997bc374ffe966afb",
+          "sha256": "337eeadb1b93aa6e151a6ca38329de912f5fb68bdc2c5648acf7cea53b38430b",
+          "sha1": "0e4ac0dff428fa6f3d315a0c05b1792cba230494",
+          "md5": "3cba7ef6b7778268e9470b522841ed25"
         }
       ]
     }
