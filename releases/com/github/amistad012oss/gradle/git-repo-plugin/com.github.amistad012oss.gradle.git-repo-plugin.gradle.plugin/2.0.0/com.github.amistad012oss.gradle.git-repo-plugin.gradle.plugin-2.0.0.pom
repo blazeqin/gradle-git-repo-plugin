@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.amistad012oss.gradle.git-repo-plugin</groupId>
+  <artifactId>com.github.amistad012oss.gradle.git-repo-plugin.gradle.plugin</artifactId>
+  <version>2.0.0</version>
+  <packaging>pom</packaging>
+  <name>Gradle git repo plugin</name>
+  <description>This plugin allows you to add a git repository as a maven repo, even if the git repository is private, similar to how CocoaPods works.</description>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.amistad012oss.gradle</groupId>
+      <artifactId>gradle-git-repo-plugin</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,44 +1,34 @@
-apply plugin: 'groovy'
-apply plugin: 'maven-publish'
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.3.0'
+}
 
 apply from: "$rootDir/version.gradle"
 
-buildscript {
-    repositories {
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-    }
-    dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.11.0'
-    }
-}
-
-apply plugin: 'com.gradle.plugin-publish'
-
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+    implementation gradleApi()
+    implementation localGroovy()
 }
 
 group = 'com.github.amistad012oss.gradle'
 
-// config for com.gradle.plugin-publish plugin
-pluginBundle {
+// 配置 Gradle 插件发布（com.gradle.plugin-publish 1.0+ 新语法）
+gradlePlugin {
     website = 'https://github.com/amistad012oss/gradle-git-repo-plugin'
     vcsUrl = 'https://github.com/amistad012oss/gradle-git-repo-plugin'
-    description = 'This plugin allows you to add a git repository as a maven repo, even if the git repository is private, similar to how CocoaPods works.'
-    tags = ['git', 'repository', 'maven']
-
     plugins {
         gitRepoPlugin {
             id = 'com.github.amistad012oss.gradle.git-repo-plugin'
+            implementationClass = 'com.github.amistad012oss.gradle.GitRepoPlugin'
             displayName = 'Gradle git repo plugin'
+            description = 'This plugin allows you to add a git repository as a maven repo, even if the git repository is private, similar to how CocoaPods works.'
+            tags.set(['git', 'repository', 'maven'])
         }
     }
 }
 
-// config for maven-publish plugin
+// 配置 maven-publish 插件
 publishing {
     publications {
         gitRepoPlugin(MavenPublication) {
