@@ -15,8 +15,8 @@ group = 'com.github.amistad012oss.gradle'
 
 // 配置 Gradle 插件发布（com.gradle.plugin-publish 1.0+ 新语法）
 gradlePlugin {
-    website = 'https://github.com/amistad012oss/gradle-git-repo-plugin'
-    vcsUrl = 'https://github.com/amistad012oss/gradle-git-repo-plugin'
+    website = 'https://github.com/blazeqin/gradle-git-repo-plugin'
+    vcsUrl = 'https://github.com/blazeqin/gradle-git-repo-plugin'
     plugins {
         gitRepoPlugin {
             id = 'com.github.amistad012oss.gradle.git-repo-plugin'

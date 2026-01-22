@@ -25,16 +25,16 @@ This plugin needs to be added via the standard plugin mechanism with this builds
 
     buildscript {
         repositories {
-            maven { url "https://github.com/amistad012oss/gradle-git-repo-plugin/raw/master/releases" }
+            maven { url "https://github.com/blazeqin/gradle-git-repo-plugin/raw/master/releases" }
         }
         dependencies {
-            classpath 'com.github.amistad012oss.gradle:git-repo-plugin:1.0.0'
+            classpath 'com.github.blazeqin.gradle:git-repo-plugin:2.0.0'
         }
     }
 
 and then apply the plugin
 
-    apply plugin: 'com.github.amistad012oss.gradle.git-repo-plugin'
+    apply plugin: 'com.github.blazeqin.gradle.git-repo-plugin'
 
 
 ### Depending on github repos
@@ -42,7 +42,7 @@ and then apply the plugin
 This plug adds a `github` method to your repositories block
 
     repositories {
-        github("amistad012oss", "maven-private", "master", "releases")
+        github("blazeqin", "maven-private", "master", "releases")
     }
 
 Add this alongside other repositories and you're good to go
